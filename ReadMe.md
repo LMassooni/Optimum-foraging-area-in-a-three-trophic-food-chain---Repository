@@ -1,11 +1,11 @@
 # Welcome to the repository of the work - Optimum foraging area in a three-trophic food chain
 
 
-##This file contains the overall information to perform the simulations and analytical dynamics of the model.
+## This file contains the overall information to perform the simulations and analytical dynamics of the model.
 
 # Simulation
 
-## The simulation depends, in general, of three files:
+## The simulation depends, in general, of four files:
 ### - common.hpp has all the common constants of the model, such as the probabilities of predation/leave a descendant, or the death probabilities. It also connects the other two files and loads the essential packages of C language. To use this file, you will need to
 ```
 #include "common.h"
@@ -14,7 +14,10 @@
 
 ### - neighbors.c has the process of declaring and assign the correct neighbors of each site. The highest number of neighbors used was 232. This means that each site of the simulation has 232 neighbors assigned in the array "vizinhos". If you want to add more neighbors, make sure to add the coordinates distance in the array "lis", with the x and y distance in a tuple form. The distance needs to be ordered with the same distance from the center. If you add new neighbors, remember to change the value "Viz_t" on the "common.h" file to the new total value of neighbors. This two variables (Viz_t and lis) are the only thing you will need to change.
 
-### - att.c has the update and measurement process of the model. Details on how the code works are commented on the file 
+### - att.c has the update process of the model. Details on how the code works are commented on the file 
+
+### - main.c is the file that call the update function from att.c and the neighbors array from neighbors.c and make the desired measurements.
+
 ### (// and /* */ blocks signals comments).
 
 ## How to reproduce the simulation results of the work
@@ -29,8 +32,8 @@
 double gz = 0.0 // At the beginning of the code
 //line 450
 for(int v = 0 ; v<50 ; v++){
-	\\block of code that is already there
-\\line 494
+	//block of code that is already there
+//line 494
 gz = gz + 0.08
 }
 ```
@@ -107,7 +110,7 @@ for(int x = 4; x<7;x++){
 ``` 
 ## To run any C file, in the linux terminal you must execute:
 ```
-gcc att.c neighbors.c -lm -O3 -o %name of executable%
+gcc main.c update/*.c -lm -O3 -o %name of executable%
 
 ./name of executable
 ```

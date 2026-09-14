@@ -26,7 +26,26 @@ simulations, in addition to standart C libraries and the conection between neigh
 #define Viz_t 232 // Total number of neighbors computed for each site
 
 extern int vizinhos[N][Viz_t]; // Array that storage the neighbors of each site (go to neighbor.c for more information)
+extern int estado[N][n_especies]; // This array stores the state of the lattice. The first index corresponds to the site
+// while the second is the respective species (0 = empty, 1 = X, 2 = Y, 3 = Z).
+// For example, estado[12][2] = 1 indicates that in the position 12 (x = 2, y = 1) there are 1 Y individual. Only one individual is permited per site.
+extern int raio_y[N]; // arrays that storage the foraging area of each individual Y in the lattice. If the site has no Y, the variable is 0.
+extern int raio_z[N]; // Same as raio_y[N] but for Z predators.
 
+extern int raios_fixos_y[34]; // List of possible foraging area values for Y species.
+// As the convergence for Y can be different from Z the values of 'raios__fixos_y' and 'raios_fixos_z' could be different for better computational costs. 
+
+
+extern int raios_fixos_z[34];
+
+
+extern int y_length; // Length of raios_fixos_y
+
+extern int z_length; // length of raios_fixos_z
+
+// Vetor mapeando o limite acumulado de cada um dos 232 vizinhos
+extern int n_vizinhos[Viz_t];// This array provides a way to adress new foraging areas when mutation occours. It is a list of the groups of neighbors of a given site in the vizinhos() function.
 void funcao_vizinhos();
+void atualizacao();
 
 #endif
